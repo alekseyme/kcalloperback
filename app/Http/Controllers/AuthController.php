@@ -31,8 +31,8 @@ class AuthController extends Controller
             'username' => $user->username,
             'role' => $user->role,
             'projects' => [
-                'in' => $user->role === 0 || $user->role === 1 ? Project::where('type', 'in')->get() : $user->projects()->where('type', 'in')->get(),
-                'out' => $user->role === 0 || $user->role === 1 ? Project::where('type', 'out')->get() : $user->projects()->where('type', 'out')->get()
+                'in' => $user->role === 0 || $user->role === 1 ? Project::where('type', 0)->orderBy('name', 'ASC')->get() : $user->projects()->where('type', 0)->orderBy('name', 'ASC')->get(),
+                'out' => $user->role === 0 || $user->role === 1 ? Project::where('type', 1)->orderBy('name', 'ASC')->get() : $user->projects()->where('type', 1)->orderBy('name', 'ASC')->get()
             ],
             'passwords' => [
                 'infrapwd' => $user->infrapwds()->where('username', $user->username)->first() ? $user->infrapwds()->where('username', $user->username)->first()->password : null,
@@ -49,8 +49,8 @@ class AuthController extends Controller
             'username' => auth()->user()->username,
             'role' => auth()->user()->role,
             'projects' => [
-                'in' => auth()->user()->role === 0 || auth()->user()->role === 1 ? Project::where('type', 'in')->get() : auth()->user()->projects()->where('type', 'in')->get(),
-                'out' => auth()->user()->role === 0 || auth()->user()->role === 1 ? Project::where('type', 'out')->get() : auth()->user()->projects()->where('type', 'out')->get()
+                'in' => auth()->user()->role === 0 || auth()->user()->role === 1 ? Project::where('type', 0)->orderBy('name', 'ASC')->get() : auth()->user()->projects()->where('type', 0)->orderBy('name', 'ASC')->get(),
+                'out' => auth()->user()->role === 0 || auth()->user()->role === 1 ? Project::where('type', 1)->orderBy('name', 'ASC')->get() : auth()->user()->projects()->where('type', 1)->orderBy('name', 'ASC')->get()
             ],
             'passwords' => [
                 'infrapwd' => auth()->user()->infrapwds()->where('username', auth()->user()->username)->first() ? auth()->user()->infrapwds()->where('username', auth()->user()->username)->first()->password : null,
