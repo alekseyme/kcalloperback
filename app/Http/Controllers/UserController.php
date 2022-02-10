@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
-use App\Manager;
 use App\Project;
 use App\Infrapwd;
 use Illuminate\Support\Facades\Hash;
@@ -18,7 +17,7 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {   
-        $users = User::with('manager')->orderBy('name', 'ASC')->get();
+        $users = User::orderBy('name', 'ASC')->get();
         return $users;
     }
 
@@ -74,7 +73,6 @@ class UserController extends Controller
         return response()->json([
             'status' => 200,
             'user' => $user,
-            // '123' => User::find($id)->infrapwds()->where('username', $user->username)->pluck('password')[0]
         ]);
     }
 
