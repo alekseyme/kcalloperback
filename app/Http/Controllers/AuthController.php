@@ -38,7 +38,8 @@ class AuthController extends Controller
                 'infrapwd' => $user->infrapwds()->where('username', $user->username)->first() ? $user->infrapwds()->where('username', $user->username)->first()->password : null,
                 'rocketpwd' => $user->rocketpwd,
                 'teampasspwd' => $user->teampasspwd,
-            ] 
+            ],
+            'infralogins' => $user->infrapwds()->get()
         ], 200)->withCookie($cookie);
     }
 
@@ -56,7 +57,8 @@ class AuthController extends Controller
                 'infrapwd' => auth()->user()->infrapwds()->where('username', auth()->user()->username)->first() ? auth()->user()->infrapwds()->where('username', auth()->user()->username)->first()->password : null,
                 'rocketpwd' => auth()->user()->rocketpwd,
                 'teampasspwd' => auth()->user()->teampasspwd,
-            ]            
+            ],
+            'infralogins' => auth()->user()->infrapwds()->get()
         ]);
         // return auth()->user();
     }

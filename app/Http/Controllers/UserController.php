@@ -87,13 +87,13 @@ class UserController extends Controller
     {
         $user = User::find($id);
 
-        $user->name = $request->input('name');
-        $user->username = $request->input('username');
-        $user->role = $request->input('role');
-        $user->rocketpwd = $request->input('rocketpwd');
-        $user->teampasspwd = $request->input('teampasspwd');
+        // $user->name = $request->input('name');
+        // $user->username = $request->input('username');
+        // $user->role = $request->input('role');
+        // $user->rocketpwd = $request->input('rocketpwd');
+        // $user->teampasspwd = $request->input('teampasspwd');
 
-        $user->update();
+        $user->update([$request]);
 
         $user->projects()->detach();
         if($request->input('projects'))
