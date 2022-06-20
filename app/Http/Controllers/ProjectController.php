@@ -16,7 +16,7 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $projects = Project::with('users')->orderBy('name', 'ASC')->get();
+        $projects = Project::orderBy('name', 'ASC')->get();
         return response($projects, 200);
     }
 
@@ -31,32 +31,6 @@ class ProjectController extends Controller
 
         return response($projects, 200);
     }    
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        $project = Project::create([
-            'name' => $request->name,
-            'type' => $request->type,
-            'scriptlink' => $request->scriptlink,
-        ]);
-
-        if($request->input('users'))
-        {
-            $project->users()->attach($request->input('users'));
-        }
-
-        return response()->json([
-            'status' => 200,
-            'name' => $project->name,
-            'message' => 'Проект успешно создан',
-        ]);
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -81,12 +55,6 @@ class ProjectController extends Controller
     {
         $project = Project::find($id);
 
-        $project->name = $request->input('name');
-        $project->type = $request->input('type');
-        $project->scriptlink = $request->input('scriptlink');
-
-        $project->update();
-
         $project->users()->detach();
         if($request->input('users'))
         {
@@ -95,23 +63,6 @@ class ProjectController extends Controller
 
         return response()->json([
             'message' => 'Проект успешно обновлён'
-        ]);
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {   
-        $project = Project::find($id);
-        $project->users()->detach();
-        $project->delete();
-
-        return response()->json([
-            'message' => 'Проект успешно удалён'
         ]);
     }
 }
