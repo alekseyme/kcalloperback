@@ -8,7 +8,7 @@ use App\User;
 class Project extends Model
 {
     protected $fillable = [
-        'name', 'type', 'scriptlink'
+        'name', 'type', 'scriptlink', 'weight'
     ];
 
     public function users()

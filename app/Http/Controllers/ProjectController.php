@@ -55,6 +55,10 @@ class ProjectController extends Controller
     {
         $project = Project::find($id);
 
+        $project->weight = $request->input('weight');
+
+        $project->update();
+
         $project->users()->detach();
         if($request->input('users'))
         {
