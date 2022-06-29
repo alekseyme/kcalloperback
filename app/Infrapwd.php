@@ -8,7 +8,7 @@ use App\User;
 class Infrapwd extends Model
 {
     protected $fillable = [
-        'displayname', 'username', 'password'
+        'displayname', 'username', 'password', 'access_to_all'
     ];
 
     public function users()

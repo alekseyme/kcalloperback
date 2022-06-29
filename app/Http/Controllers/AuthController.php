@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\Project;
+use App\Infrapwd;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Hash;
@@ -39,7 +40,8 @@ class AuthController extends Controller
                 'rocketpwd' => $user->rocketpwd,
                 'teampasspwd' => $user->teampasspwd,
             ],
-            'infralogins' => $user->infrapwds()->get()
+            'infralogins' => $user->infrapwds()->get(),
+            'infralogins_all' => Infrapwd::where('access_to_all', 1)->get(),
         ], 200)->withCookie($cookie);
     }
 
@@ -58,7 +60,9 @@ class AuthController extends Controller
                 'rocketpwd' => auth()->user()->rocketpwd,
                 'teampasspwd' => auth()->user()->teampasspwd,
             ],
-            'infralogins' => auth()->user()->infrapwds()->get()
+            'infralogins' => auth()->user()->infrapwds()->get(),
+            'infralogins_all' => Infrapwd::where('access_to_all', 1)->get(),
+
         ]);
         // return auth()->user();
     }

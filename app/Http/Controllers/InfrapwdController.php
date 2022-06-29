@@ -37,6 +37,7 @@ class InfrapwdController extends Controller
             'displayname' => $request->displayname,
             'username' => $request->username,
             'password' => $request->password,
+            'access_to_all' => $request->access_to_all,
         ]);
 
         if($request->input('users'))
@@ -76,6 +77,7 @@ class InfrapwdController extends Controller
         $infrapwd->displayname = $request->input('displayname');
         $infrapwd->username = $request->input('username');
         $infrapwd->password = $request->input('password');
+        $infrapwd->access_to_all = $request->input('access_to_all');
 
         $infrapwd->update();
 
