@@ -46,7 +46,6 @@ class InfrapwdController extends Controller
         }
 
         return response()->json([
-            'status' => 200,
             'message' => 'Логин успешно создан',
         ]);
     }
